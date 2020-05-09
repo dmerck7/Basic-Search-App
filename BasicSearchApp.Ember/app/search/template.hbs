@@ -1,0 +1,93 @@
+
+
+
+<div class="layout-row layout-xs-column" style="justify-content:center">
+    <div class="layout-column flex-xs flex-gt-xs-60" style="padding:10px;">
+
+        <div class="layout layout-sm-row" style="margin-top:20px; justify-content:space-evenly; flex-wrap: wrap">
+
+            {{paper-input id="search" style="min-width:200px; margin:0"
+                label="Search" 
+                placeholder="Enter Search Text" 
+                value=query onKeyDown=(action "onKeypress") 
+                onChange=(action (mut query)) 
+                icon="search"}}  
+
+            <div style="width:200px; layout-sm-col">
+                <label style="font-size:10px; margin-top:18px; color:rgba(0, 0, 0, 0.54); font-family:Roboto, helvetica-neue, sans-serif; font-weight: 400;">Patient Filter</label>
+                <select id="patientfilter" onchange={{action updatePatientValue value="target.value"}} class="flex-30" style="height:24px; min-width:200px; margin-top:8px;">
+                    {{#each patients as |patient|}}
+                    <option value={{patient.id}} >{{patient.name}}</option>
+                    {{/each}}
+                </select>  
+            </div>
+
+            <div style="width:200px; layout-sm-col">
+                <label style="font-size:10px; margin-top:18px; color:rgba(0, 0, 0, 0.54);; font-family:Roboto, helvetica-neue, sans-serif; font-weight: 400;">Sort</label>
+                <select id="sort" onchange={{action updateSortValue value="target.value"}} class="flex-30" style="height:24px; min-width:200px; margin-top:8px;">
+                    <option value="0" >Relevance</option>
+                    <option value="1" >Date</option>
+                    <option value="2" >Patient Name</option>
+                    <option value="3" >Document Name</option>
+                </select>  
+            </div>
+        </div>
+
+        <div style="margin-top:20px;">
+
+        {{#each sortedDocuments as |document|}}
+
+            {{#if (compare selectedPatient '===' document.patientId)}}
+                {{#paper-expansion-panel onExpandedChange=(action "onExpandedChange" document.id) as |panel|}} 
+                {{#panel.collapsed}}
+                    <div class="md-panel-title" style="width:400px;">{{document.documentName}}</div>
+                    <div class="md-panel-summary">{{document.patientName}}</div>
+
+                    <div class="actions">
+                        <span style="font-size:10px; margin-right:40px;">{{document.documentDateDisplay}}</span>
+                        {{paper-icon "keyboard_arrow_down"}}
+                    </div>
+                {{/panel.collapsed}}
+
+                {{#panel.expanded as |expanded|}}
+                    {{#expanded.header}}
+                    <div class="md-panel-title">{{document.documentName}}</div>
+                    <div class="md-panel-summary">{{document.patientName}}</div>
+                    {{paper-icon "keyboard_arrow_up"}}
+                    {{/expanded.header}}
+
+                    {{#expanded.content}}
+                    {{{document.content}}}
+                    {{/expanded.content}}
+
+                    {{#expanded.footer}}
+                    <span class="flex"></span>
+                    {{#paper-button onClick=(action panel.collapse)}}
+                        Close
+                    {{/paper-button}}
+                    {{!-- {{#paper-button primary=true onClick=(action panel.collapse)}}
+                        Save
+                    {{/paper-button}} --}}
+                    {{/expanded.footer}}
+
+                {{/panel.expanded}}
+                {{/paper-expansion-panel}}
+            {{/if}}
+        {{/each}}
+        
+
+        {{#if (eq loading false)}}
+            {{#if (eq documents.length 0)}}
+                <div>
+                    <h4 style="color:grey">No Records Found</h4>
+                </div>
+            {{/if}}
+        {{/if}}
+
+        </div>
+
+    </div>
+ </div>
+
+
+{{outlet}}

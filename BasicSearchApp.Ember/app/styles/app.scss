@@ -1,0 +1,13 @@
+@import 'ember-paper';
+@import "ember-paper";
+@import "ember-paper-expansion-panel";
+
+@import "ember-power-select";
+
+md-input-container .md-default-theme .md-icon-left .md-input-has-placeholder .ember-view {
+    margin-bottom:0 !important;
+}
+
+#search {
+    margin-bottom:0 !important;
+}
