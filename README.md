@@ -47,9 +47,8 @@ This solution uses its own internal indexing engine with a produce-consume appro
  * Move from Ember to to Angular, React, or Vue
  * Add database support for persisting repositories and folder index
  * Implement independent indexing task in the Task Scheduler (task not implemented yet)
- * Tigger indexing through service bus (not implemented ye) based on events for new docs
+ * Tigger indexing through service bus (not implemented yet) based on new doc triggered events
  * Improve indexing/querying to span multiple page documents and phrases across multiple lines
 
 ### Enjoy
 David Merck dmerck7@gmail.com
-
