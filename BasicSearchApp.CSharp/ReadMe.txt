@@ -1,67 +1,55 @@
-//////////////////////////////////////////////////////////////////////
-/// Welcome to Basic Search App
-///
-/// Author - David Merck
-/// 5/8/2020
-//////////////////////////////////////////////////////////////////////
+# Welcome to Basic Search App
 
-BasicSearchApp:
+A multi-tier web app for indexing, filtering, searching and sorting resource text documents.
 
-This multi-tier web app provides indexing service to resource documents for the purpose of filtering/searching the contents of the documents.
+<b>David Merck</b>
+Living Source
+5/8/2020
 
-This architecture uses its own internal indexing engine with a produce-consume approach for perdormance.  The software is built with the idea of 
-owning the complete soulution and growing it into a viable service.
+## A Complete Solution Without Dependencies
 
-Notable Alternative (Depenecy) Approaches:
-Azure Portal:
-https://docs.microsoft.com/en-us/azure/search/search-get-started-dotnet
-Microsoft Indexing Service
-https://flylib.com/books/en/3.443.1.100/1/
+This solution uses its own internal indexing engine with a produce-consume approach for performance.  The architecture is built on the idea of owning the complete solution and growing it into a viable service.  It is built with going to core (Cross Platform Capability) in mind and being able to spin up container instances without dependency restrictions.  The software is designed for and would benefit greatly in having its own database for persistent storage.
 
+<b>Here are some notable dependency driven alternative approaches</b>
 
-Installation
+* Azure Portal - https://docs.microsoft.com/en-us/azure/search/search-get-started-dotnet
+* Microsoft Indexing Service - https://flylib.com/books/en/3.443.1.100/1/
 
-Resources
-The resource folder must be moved to the c:\ drive.  It is important the index.json file be present in the resource folder.
+### Features
 
-BackEnd
-Open and rebuild the solution.  Running will serve up the API at http://localhost:65522
+ * Multi-tiered architecture abstracts the data source (Allowing for minimally invasive future database support)
+ * Full Dependency Injection - easily port to .Net Core and apply unit testing
+ * Produce/Consume pattern for fast indexing
+ * Search for one word or multiple words or phrases(enclosed in quotes)
+ * Filter results by Patient
+ * Sort results by relevancy, date, document name, or patient name
+ * Responsive layout based on Material Design
+ * Mobile application support through Apache Cordova
+ * Expandable Design
 
-Front-end
-The front-end ember project will require "npm install"
-"Ember Serve" will compile and make the the UI available at http://localhost:4200
+### Installation
 
+<b>Resources</b>
+ * The resource folder must be moved to the root of the c:\ drive
+ * Verify the index.json file is present in the resource folder.
 
-Features:
+<b>BackEnd</b>
+ * Pulldown the repo
+ * Open and Rebuild the solution
+ * Running will serve up the API at http://localhost:65522
 
-Multi-tiered architechture abstracts the data source (Alowing for minimumly inavasive future database support)
-Full Dependency Injection (Easily Portable to .Net Core)
-Produce/Consume pattern for fast indexing
-Search for one word or multiple words and phrases(enclosed in quotes)
-Filter results by Patient
-Sort results by relevancy, date, document name, patient name
-Responsive layout based on Material Design
-Mobile application support through Apache Cordova
-Expandable Design
+<b>Frontend</b>
+ * Pull down the Ember Project
+ * Use "npm install" to install packages (Relies on Ember Cli)
+ * Use "Eember serve" to serve the UI at http://localhost:4200
 
-Recomendation
-Move from Ember to to Angular, React, or Vue
+### Recommendations
+ * Move from Ember to to Angular, React, or Vue
+ * Add database support for persisting repositories and folder index
+ * Implement independent indexing task in the Task Scheduler (task not implemented yet)
+ * Tigger indexing through service bus (not implemented ye) based on events for new docs
+ * Improve indexing/querying to span multiple page documents and phrases across multiple lines
 
-Future Independent Task Scheduler (Not fully implemented yet) to index in the background based on a service bus messaging or other event triggering.
+### Enjoy
+David Merck dmerck7@gmail.com
 
-
-Base Requirements:
-
-For the endpoint at /api/patients/search?query=abc , 'query' parameter is supposed to be optional. If it's not present, return all patients with all documents. Right now if you build, run within Visual Studio using IIS Express, and navigate to localhost:65522/api/patients/search using the browser, you will see an error.
-However, if you build, run, and navigate to localhost:65522/api/patients/search?query=abc , you will see response with empty objects. This also needs fixing.
-Make the 'query' parameter work, for instance enhance the backend to filter the results it returns by a case-insensitive, partial match over the document title and contents.
-Clean up the code using better object-oriented design and improving readability.
-Add unit tests.
-Other possible enhancements to the search.
-Other possible general backend enhancements.
-Front end: if you have HTML/JavaScript experience, also work on some of the following:
-
-Improve the result rendering in the UI with better styling of snippet results.
-Update the search interface to debounce calls to the backend
-Perform highlighting of the search term in the text results
-Come up with and add a new feature to the UI, this can be anything your creativity can dream up.
