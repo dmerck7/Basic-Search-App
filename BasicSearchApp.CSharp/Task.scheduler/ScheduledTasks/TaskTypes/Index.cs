@@ -11,16 +11,14 @@ using Scheduler.DataModels;
 using Scheduler.NPoco;
 using Scheduler.TSQL;
 using Scheduler.Utils;
-using MailgunSharp;
-using MailgunSharp.DataModels;
 using NPoco;
 
 namespace Scheduler.ScheduledTasks.TaskTypes
 {
-    class EmailBlast
+    class Index
     {
         // Process a Request task
-        public static void ProcessEmailBlast(Guid taskId)
+        public static void ProcessIndex(Guid taskId)
         {
             
          

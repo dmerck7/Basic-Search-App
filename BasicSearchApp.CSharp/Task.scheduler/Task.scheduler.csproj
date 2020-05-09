@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CWScheduler</RootNamespace>
     <AssemblyName>TaskCenter.Scheduler</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -118,7 +118,7 @@
     <Compile Include="DataModels\TaskScheduleDto.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="NPoco\NPocoDatabase.cs" />
-    <Compile Include="ScheduledTasks\TaskTypes\EmailBlast.cs" />
+    <Compile Include="ScheduledTasks\TaskTypes\Index.cs" />
     <Compile Include="Scheduler.cs">
       <SubType>Component</SubType>
     </Compile>

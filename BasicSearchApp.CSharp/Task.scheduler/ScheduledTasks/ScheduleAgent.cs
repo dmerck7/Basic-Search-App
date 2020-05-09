@@ -24,8 +24,8 @@ namespace Scheduler.ScheduledTasks
         {
             switch (task.TaskType)
             {
-                case "EmailBlast":
-                    TaskTypes.EmailBlast.ProcessEmailBlast(task.TaskId);
+                case "Index":
+                    TaskTypes.Index.ProcessIndex(task.TaskId);
                     break;
             }
         }
