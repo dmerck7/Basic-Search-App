@@ -46,9 +46,12 @@ This solution uses its own internal indexing engine with a produce-consume appro
 ### Recommendations
  * Move from Ember to to Angular, React, or Vue
  * Add database support for persisting repositories and folder index
- * Implement independent indexing task in the Task Scheduler (task not implemented yet)
+ * Implement an independent indexing task in the Task Scheduler (task not implemented yet)
  * Tigger indexing through service bus (not implemented yet) based on new doc triggered events
  * Improve indexing/querying to span multiple page documents and phrases across multiple lines
+ * Improve information gathering for multi-word and phrase relevancy 
+ * Add weights and algoithms to support word imporatance and negative words
+ * Add scraping methods to grab meaningful values from docs based on preceding labels and word order.
 
 ### Enjoy
 David Merck dmerck7@gmail.com
