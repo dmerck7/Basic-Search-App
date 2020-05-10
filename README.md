@@ -49,7 +49,11 @@ This solution implements its own internal indexing engine with a produce-consume
 
 ### Design
 
-Designed to ultimatly work as a service, document/payient metadata would be submitted and the service would store and index the content.  Currently (due to the time restriction) when the service starts, the current documents are seeded into a data context and an index.json file respresenting the current indexed state of the documents is loaded.  The ability to index all, add and remove documents from the index currently exists yet there is no UI for submitting document.  There is curently no database although, due to the abstraction layer, it shouls be easy to add one.
+Designed to ultimatly work as a service, document/patient metadata would be submitted/uploaded and the service would store and index the content.  Currently (due to the time restriction) when the service starts, the current documents are seeded into a data context and an index.json file respresenting the current indexed state of the documents is loaded.  The ability to index all, add and remove documents from the index currently exists yet there is no UI for submitting document.  There is curently no database although, due to the abstraction layer, implementation should be relatively simpe.
+
+<b>Using Postman</b>
+Postman may be used to call the api to create the initial index.json  (indexed state) file or test the adding and removing of document's content from the index.  Indexing documents one by one as they are added will surely be faster and will allow for notification once a document is searchable. The indexing should be ultimately handled in a separate service as either a scheduled tasked or a triggered event.  I have included the Task Scheduler project but have not yet (time ran out) implemented the indexing code as a task in the Task Scheduler.
+ * http://localhost:65522/indexing/IndexAll
 
 ### Recommendations
  * Move from Ember to to Angular, React, or Vue
@@ -61,6 +65,8 @@ Designed to ultimatly work as a service, document/payient metadata would be subm
  * Add scraping methods to grab meaningful values from docs based on preceding labels and word order.
  * Add the search parameter and opening a document to the route so the back button will access previous searches and opened documents
  * Either add ability to pin open a document or a sub search option in the open document to perfom subsequent searchs within selected document. Consider Modal.
+ * Consider editable documents
+ * Consider heading extraction/formatting based on line length and preceding/post return lines.
 
 ### Enjoy
 David Merck dmerck7@gmail.com
