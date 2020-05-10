@@ -96,6 +96,10 @@ This solution implements its own internal indexing engine with a produce-consume
  * Mobile application support through Apache Cordova
  * Expandable Design
 
+
+![](screenshot.jpg =500x)
+
+
 ### Installation
 
 <b>Resources</b>
@@ -123,6 +127,8 @@ Designed to ultimatly work as a service, document/patient metadata would be subm
 <b>Using Postman</b>
 Postman may be used to call the api to create the initial index.json  (indexed state) file or test the adding and removing of document's content from the index.  Indexing documents one by one as they are added will surely be faster and will allow for notification once a document is searchable. The indexing should be ultimately handled in a separate service as either a scheduled tasked or a triggered event.  I have included the Task Scheduler project but have not yet (time ran out) implemented the indexing code as a task in the Task Scheduler.
  * http://localhost:65522/indexing/IndexAll
+
+
 
 ### Recommendations
  * Move from Ember to to Angular, React, or Vue
