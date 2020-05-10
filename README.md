@@ -8,7 +8,7 @@ Living Source
 
 ## A Complete Solution Without Dependencies
 
-This solution uses its own internal indexing engine with a produce-consume approach for performance.  The architecture is built on the idea of owning the complete solution and growing it into a viable service.  It is built with going to core (Cross Platform Capability) in mind and being able to spin up container instances without dependency restrictions.  The software is designed for and would benefit greatly in having its own database for persistent storage.
+This solution implements its own internal indexing engine with a produce-consume approach for performance.  The architecture is built on the idea of owning the complete solution and growing it into a viable service.  The software, built to ultimately migrate to core (cross platform capability), is highly portable, lending itself to light weight container implementations.  This implementation is designed for, and would benefit greatly from, having its own persistent database storage.
 
 <b>Here are some notable dependency driven alternative approaches</b>
 
@@ -35,12 +35,16 @@ This solution uses its own internal indexing engine with a produce-consume appro
 
 <b>BackEnd</b>
  * Pulldown the repo
+ * Rwquires .Net 4.6
  * Open and Rebuild the solution
  * Running will serve up the API at http://localhost:65522
 
 <b>Frontend</b>
+ * Recoment using VSCode with built in terminal
  * Pull down the Ember Project
- * Use "npm install" to install packages (Relies on Ember Cli)
+ * Requires Node.js (Must be relatively newer version)
+ * Use "npm install" to install packages
+ * Use "npm install -g ember-cli" to install Ember-Cli  
  * Use "Eember serve" to serve the UI at http://localhost:4200
 
 ### Recommendations
