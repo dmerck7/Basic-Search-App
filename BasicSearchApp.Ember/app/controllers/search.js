@@ -93,10 +93,11 @@ export default class SearchController extends Controller {
             // TODO - greatly enhance performance by using indexing infomation such as lineIndex, wordIndex
 
             // handle sequences spanning lines
-            var searchToken = queryToken[0].replace(' ', '((<br\/>)|\s)+' );  
+            var searchToken = '((' + queryToken[0].replace(' ', '((<br\\/>)|\\s)+') + ')+[,.?!]*)'; 
+            console.log(searchToken) 
 
             // Case insensitive replace
-            var reg = new RegExp('('+searchToken+')', 'gi');
+            var reg = new RegExp(searchToken, 'gi');
             txt = txt.replace(reg, '<mark>$1</mark>');
         });
         return txt;

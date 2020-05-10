@@ -109,7 +109,7 @@ namespace BasicSearchApp.Services
                     location.wordIndex = wordIndex;
                     location.lineLength = words.Count - 1;
                     
-                    var strippedWord = word;// this.removePunctuationAtEnds(word);
+                    var strippedWord = this.removePunctuationAtEnds(word);
                     if (DbContext.Index.ContainsKey(strippedWord))
                     {
                         List<dynamic> list = DbContext.Index[strippedWord];

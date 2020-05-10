@@ -44,24 +44,28 @@ namespace BasicSearchApp.Services
             {
                 // Query can have multiple words or phrases in quotes so handle accordingly
                 List<dynamic> queryResults = GetQueryIndexResults(query);
-
-                // Index sightings can have more than one per document so remove duplicate documents 
-                var documentIds = queryResults.Select(d => d.documentId).Distinct();
-
-                // Build document headers
-                var documentList = new List<dynamic>();
-                foreach (var documentId in documentIds)
+                
+                // Single punctuation will return null result
+                if (queryResults != null)
                 {
-                    Document document = this.documentRepository.GetByID((long)documentId);
-                    Patient patient = this.patientRepository.GetByID((long)document.PatientId);
+                    // Index sightings can have more than one per document so remove duplicate documents 
+                    var documentIds = queryResults.Select(d => d.documentId).Distinct();
 
-                    // TODO - Calc relavancy based on multiple words and phrases so weights can be added (will be needed for negative values)
-                    // Determine relevancy for document based on search
-                    List<dynamic> lineIndexList = queryResults.Where(r => r.patientId == patient.Id && r.documentId == document.Id).Select(l => l.lineIndex).ToList();
+                    // Build document headers
+                    var documentList = new List<dynamic>();
+                    foreach (var documentId in documentIds)
+                    {
+                        Document document = this.documentRepository.GetByID((long)documentId);
+                        Patient patient = this.patientRepository.GetByID((long)document.PatientId);
 
-                    results.Add(this.buildResult(document, patient, lineIndexList.Count));
+                        // TODO - Calc relavancy based on multiple words and phrases so weights can be added (will be needed for negative values)
+                        // Determine relevancy for document based on search
+                        List<dynamic> lineIndexList = queryResults.Where(r => r.patientId == patient.Id && r.documentId == document.Id).Select(l => l.lineIndex).ToList();
+
+                        results.Add(this.buildResult(document, patient, lineIndexList.Count));
+                    }
+                    results.OrderByDescending(x => x.RelevantCount);
                 }
-                results.OrderByDescending(x => x.RelevantCount);
             }
             // No query given so return evry document header
             else
@@ -221,7 +225,10 @@ namespace BasicSearchApp.Services
             // Do not partial match sequence words
             if ((bool)sequence)
             {
-                results = results.Concat(DbContext.Index[key.ToLower()]).ToList();
+                if (DbContext.Index.ContainsKey(key.ToLower()))
+                {
+                    results = results.Concat(DbContext.Index[key.ToLower()]).ToList();
+                }
             }
             else
             {

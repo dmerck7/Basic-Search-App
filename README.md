@@ -56,7 +56,6 @@ Designed to ultimatly work as a service, document/payient metadata would be subm
  * Add database support for persisting repositories and folder index
  * Implement an independent indexing task in the Task Scheduler (task not implemented yet)
  * Tigger indexing through service bus (not implemented yet) based on new doc triggered events
- * Improve indexing/querying to span multiple page documents and phrases across multiple lines
  * Improve information gathering for multi-word and phrase relevancy 
  * Add weights and algoithms to support word imporatance and negative words
  * Add scraping methods to grab meaningful values from docs based on preceding labels and word order.

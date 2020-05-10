@@ -49,20 +49,13 @@ This solution implements its own internal indexing engine with a produce-consume
 
 ### Design
 
-Designed to ultimatly work as a service, document/payient metadata would be submitted and 
-the service would store and index the content.  Currently (due to the time restriction) 
-when the service starts, the current documents are seeded into a data context and an index.json 
-file respresenting the current indexed state of the documents is loaded.  The ability to index 
-all, add and remove documents from the index currently exists yet there is no UI for submitting 
-document.  There is curently no database although, due to the abstraction layer, it shouls be 
-easy to add one.
+Designed to ultimatly work as a service, document/payient metadata would be submitted and the service would store and index the content.  Currently (due to the time restriction) when the service starts, the current documents are seeded into a data context and an index.json file respresenting the current indexed state of the documents is loaded.  The ability to index all, add and remove documents from the index currently exists yet there is no UI for submitting document.  There is curently no database although, due to the abstraction layer, it shouls be easy to add one.
 
 ### Recommendations
  * Move from Ember to to Angular, React, or Vue
  * Add database support for persisting repositories and folder index
  * Implement an independent indexing task in the Task Scheduler (task not implemented yet)
  * Tigger indexing through service bus (not implemented yet) based on new doc triggered events
- * Improve indexing/querying to span multiple page documents and phrases across multiple lines
  * Improve information gathering for multi-word and phrase relevancy 
  * Add weights and algoithms to support word imporatance and negative words
  * Add scraping methods to grab meaningful values from docs based on preceding labels and word order.
