@@ -27,6 +27,8 @@ This solution implements its own internal indexing engine with a produce-consume
  * Mobile application support through Apache Cordova
  * Expandable Design
 
+ <img src="./ScreenShot.jpg" width="600">
+
 ### Installation
 
 <b>Resources</b>
@@ -48,8 +50,6 @@ This solution implements its own internal indexing engine with a produce-consume
  * Use "Eember serve" to serve the UI at http://localhost:4200
 
 ### Design
-
- <img src="./ScreenShot.jpg" width="600">
 
 Designed to ultimatly work as a service, document/patient metadata would be submitted/uploaded and the service would store and index the content.  Currently (due to the time restriction) when the service starts, the current documents are seeded into a data context and an index.json file respresenting the current indexed state of the documents is loaded.  The ability to index all, add and remove documents from the index currently exists yet there is no UI for submitting document.  There is curently no database although, due to the abstraction layer, implementation should be relatively simpe.
 
