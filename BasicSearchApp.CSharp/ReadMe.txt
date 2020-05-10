@@ -97,7 +97,7 @@ This solution implements its own internal indexing engine with a produce-consume
  * Expandable Design
 
 
-![](screenshot.jpg =500x)
+<img src="screenshot.jpg" width="600">
 
 
 ### Installation
