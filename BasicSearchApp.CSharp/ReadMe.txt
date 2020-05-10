@@ -59,6 +59,8 @@ Designed to ultimatly work as a service, document/payient metadata would be subm
  * Improve information gathering for multi-word and phrase relevancy 
  * Add weights and algoithms to support word imporatance and negative words
  * Add scraping methods to grab meaningful values from docs based on preceding labels and word order.
+ * Add the search parameter and opening a document to the route so the back button will access previous searches and opened documents
+ * Either add ability to pin open a document or a sub search option in the open document to perfom subsequent searchs within selected document. Consider Modal.
 
 ### Enjoy
 David Merck dmerck7@gmail.com
