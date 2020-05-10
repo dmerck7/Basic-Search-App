@@ -78,7 +78,6 @@ export default class SearchController extends Controller {
         }).then((content) => {
             var doc = this.store.peekRecord('document', id);
             var txt = content.get('txt');
-            txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br/>');
             txt = this.markAllInstances(txt, this.query);
 
             doc.set("content", txt);
@@ -86,20 +85,40 @@ export default class SearchController extends Controller {
     }
 
     markAllInstances(txt, query) {
-        var queryTokens = this.splitQuery(query)
+        var queryTokens = this.splitQuery(query);
 
-        queryTokens.forEach( (queryToken) => {         
+        txt = txt.replace(/(?:\r\n|\r|\n)/g, '`~~~`');
+        queryTokens.forEach( (queryToken) => {     
 
             // TODO - greatly enhance performance by using indexing infomation such as lineIndex, wordIndex
 
-            // handle sequences spanning lines
-            var searchToken = '((' + queryToken[0].replace(' ', '((<br\\/>)|\\s)+') + ')+[,.?!]*)'; 
-            console.log(searchToken) 
+            if (queryToken[0].indexOf('`~~~`')===-1){
 
-            // Case insensitive replace
-            var reg = new RegExp(searchToken, 'gi');
-            txt = txt.replace(reg, '<mark>$1</mark>');
+                //All of these should be escaped: \\ \^ \$ \* \+ \? \. \( \) \| \{ \} \[ \] for regex
+                queryToken[0] = queryToken[0].replace('\\', '\\\\');
+                queryToken[0] = queryToken[0].replace('^', '\\^');
+                queryToken[0] = queryToken[0].replace('$', '\\$');
+                queryToken[0] = queryToken[0].replace('*', '\\*');
+                queryToken[0] = queryToken[0].replace('+', '\\+');
+                queryToken[0] = queryToken[0].replace('?', '\\?');
+                queryToken[0] = queryToken[0].replace('(', '\\(');
+                queryToken[0] = queryToken[0].replace(')', '\\)');
+                queryToken[0] = queryToken[0].replace('|', '\\|');
+                queryToken[0] = queryToken[0].replace('{', '\\{');
+                queryToken[0] = queryToken[0].replace('}', '\\}');
+                queryToken[0] = queryToken[0].replace('[', '\\[');
+                queryToken[0] = queryToken[0].replace(']', '\\]');
+
+                // handle sequences spanning lines
+                var searchToken = '((' + queryToken[0].replace(' ', '((`~~~`)|\\s)+') + ')+[,.?!]*)'; 
+
+                // Case insensitive replace
+                var reg = new RegExp(searchToken, 'gi');
+                txt = txt.replace(reg, '<mark>$1</mark>');    
+            }        
         });
+        txt = txt.split('`~~~`').join('<br/>');
+
         return txt;
     }
 
