@@ -145,22 +145,21 @@ namespace BasicSearchApp.Services
                 List<dynamic> prevs = this.getIndexValue(prevWord, true);
                 List<dynamic> nexts = this.getIndexValue(nextWord, true);
 
-                // TODO - build logic to handle spanning multiple lines
-                // Currently restricted to be on same line
-
-                // Use joins with a where cause to only get valid(next to each other in the right order) results regarding the current word and the word before
+                // Use joins with a where cause to only get valid(next to each other and in the right order) results regarding the current word and the previous word
                 var validPrevResults = from item in items
                                        join prev in prevs
-                                       on new { item.documentId, item.lineIndex } equals new { prev.documentId, prev.lineIndex }
-                                       where item.wordIndex - 1 == prev.wordIndex
+                                       on new { item.documentId } equals new { prev.documentId}
+                                       where (item.lineIndex == prev.lineIndex && item.wordIndex - 1 == prev.wordIndex) // Handle on the same line 
+                                       || (item.wordIndex==0 && prev.WordIndex==prev.lineLength && prev.lineIndex==item.lineIndex-1)  // handle spanning multiple lines
                                        select item;
 
-                // Use joins with a where cause to only get valid(next to each other in the right order) results regarding the current word and the next word
+                // Use joins with a where cause to only get valid(next to each other and in the right order) results regarding the current word and the next word
                 var validNextResults = from item in items
-                                        join next in nexts
-                                        on new { item.documentId, item.lineIndex } equals new { next.documentId, next.lineIndex}
-                                        where item.wordIndex+1==next.wordIndex
-                                        select item;
+                                       join next in nexts
+                                       on item.documentId equals next.documentId
+                                       where (item.lineIndex == next.lineIndex && item.wordIndex + 1 == next.wordIndex)
+                                       || (item.wordIndex == item.lineLength && next.wordIndex == 0 && next.lineIndex == item.lineIndex + 1)
+                                       select item;
 
                 // Consolidate based on first word, last word, or somewhere in the middle)
                 if (i == 0)

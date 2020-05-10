@@ -47,6 +47,16 @@ This solution implements its own internal indexing engine with a produce-consume
  * Use "npm install -g ember-cli" to install Ember-Cli  
  * Use "Eember serve" to serve the UI at http://localhost:4200
 
+### Design
+
+Designed to ultimatly work as a service, document/payient metadata would be submitted and 
+the service would store and index the content.  Currently (due to the time restriction) 
+when the service starts, the current documents are seeded into a data context and an index.json 
+file respresenting the current indexed state of the documents is loaded.  The ability to index 
+all, add and remove documents from the index currently exists yet there is no UI for submitting 
+document.  There is curently no database although, due to the abstraction layer, it shouls be 
+easy to add one.
+
 ### Recommendations
  * Move from Ember to to Angular, React, or Vue
  * Add database support for persisting repositories and folder index

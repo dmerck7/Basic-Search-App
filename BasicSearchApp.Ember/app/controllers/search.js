@@ -78,8 +78,8 @@ export default class SearchController extends Controller {
         }).then((content) => {
             var doc = this.store.peekRecord('document', id);
             var txt = content.get('txt');
+            txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br/>');
             txt = this.markAllInstances(txt, this.query);
-            txt = txt.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
             doc.set("content", txt);
         });
@@ -92,8 +92,11 @@ export default class SearchController extends Controller {
 
             // TODO - greatly enhance performance by using indexing infomation such as lineIndex, wordIndex
 
+            // handle sequences spanning lines
+            var searchToken = queryToken[0].replace(' ', '((<br\/>)|\s)+' );  
+
             // Case insensitive replace
-            var reg = new RegExp('('+queryToken[0]+')', 'gi');
+            var reg = new RegExp('('+searchToken+')', 'gi');
             txt = txt.replace(reg, '<mark>$1</mark>');
         });
         return txt;
